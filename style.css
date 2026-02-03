@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0d0d0d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Courier New', monospace;
+    color: #ffffff;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.score-board {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.score {
+    min-width: 60px;
+    text-align: center;
+}
+
+.divider {
+    color: #666;
+}
+
+#gameCanvas {
+    background-color: #1a1a1a;
+    border: 4px solid #333;
+    border-radius: 8px;
+    display: block;
+}
+
+.message {
+    font-size: 24px;
+    color: #00ff00;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    min-height: 32px;
+}
