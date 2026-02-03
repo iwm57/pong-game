@@ -50,10 +50,18 @@
         <canvas id="gameCanvas" width="800" height="600"></canvas>
         <div id="message" class="message">Press SPACE to Start</div>
         <div class="controls">
-            <span class="speed-label">Speed:</span>
-            <button class="speed-btn" data-speed="slow">Slow</button>
-            <button class="speed-btn active" data-speed="medium">Medium</button>
-            <button class="speed-btn" data-speed="fast">Fast</button>
+            <div class="control-group">
+                <span class="speed-label">Mode:</span>
+                <button class="mode-btn active" data-mode="1p">1 Player</button>
+                <button class="mode-btn" data-mode="2p">2 Player</button>
+            </div>
+            <div class="control-group">
+                <span class="speed-label">Speed:</span>
+                <button class="speed-btn" data-speed="slow">Slow</button>
+                <button class="speed-btn active" data-speed="medium">Medium</button>
+                <button class="speed-btn" data-speed="fast">Fast</button>
+                <button class="speed-btn insane" data-speed="insane">INSANE</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
