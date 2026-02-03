@@ -12,13 +12,100 @@ body {
     min-height: 100vh;
     font-family: 'Courier New', monospace;
     color: #ffffff;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Cheerleaders */
+.cheerleader {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24px;
+    z-index: 10;
+    animation: bounce 0.5s ease-in-out infinite alternate;
+}
+
+.cheerleader.top-left { top: 20px; left: 20px; }
+.cheerleader.top-right { top: 20px; right: 20px; animation-delay: 0.25s; }
+.cheerleader.bottom-left { bottom: 20px; left: 20px; animation-delay: 0.125s; }
+.cheerleader.bottom-right { bottom: 20px; right: 20px; animation-delay: 0.375s; }
+
+.cheerleader .head {
+    font-size: 20px;
+    animation: headBob 0.5s ease-in-out infinite alternate;
+}
+
+.cheerleader .body {
+    font-size: 32px;
+    position: relative;
+}
+
+.cheerleader .pom-poms {
+    position: absolute;
+    top: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.cheerleader .pom {
+    font-size: 16px;
+    animation: wave 0.3s ease-in-out infinite alternate;
+}
+
+.cheerleader .pom.left { animation-delay: 0s; }
+.cheerleader .pom.right { animation-delay: 0.15s; }
+
+/* Cheerleader animations */
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+@keyframes headBob {
+    0% { transform: rotate(-5deg); }
+    100% { transform: rotate(5deg); }
+}
+
+@keyframes wave {
+    0% { transform: rotate(-20deg) scale(1); }
+    100% { transform: rotate(20deg) scale(1.2); }
+}
+
+/* Go Team chant bubble */
+.cheerleader::after {
+    content: 'GO!';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #ff69b4;
+    font-weight: bold;
+    animation: chant 1s ease-in-out infinite;
+    opacity: 0;
+}
+
+.cheerleader.top-left::after { animation-delay: 0s; }
+.cheerleader.top-right::after { animation-delay: 0.5s; content: 'TEAM!'; }
+.cheerleader.bottom-left::after { animation-delay: 0.25s; content: 'GO!'; }
+.cheerleader.bottom-right::after { animation-delay: 0.75s; content: 'TEAM!'; }
+
+@keyframes chant {
+    0%, 100% { opacity: 0; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 1; transform: translateX(-50%) translateY(-5px); }
+}
+
+/* Game container */
 .game-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    z-index: 1;
 }
 
 .score-board {
