@@ -10,12 +10,49 @@ const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 600;
 const PADDLE_WIDTH = 15;
 const PADDLE_HEIGHT = 100;
-const PADDLE_SPEED = 8;
 const PADDLE_OFFSET = 20;
 const BALL_SIZE = 15;
-const INITIAL_BALL_SPEED = 6;
-const BALL_SPEED_INCREASE = 0.5;
-const MAX_BALL_SPEED = 15;
+
+// Speed settings
+const SPEED_SETTINGS = {
+    slow: {
+        ballSpeed: 4,
+        maxBallSpeed: 10,
+        paddleSpeed: 5,
+        speedIncrease: 0.3
+    },
+    medium: {
+        ballSpeed: 6,
+        maxBallSpeed: 15,
+        paddleSpeed: 8,
+        speedIncrease: 0.5
+    },
+    fast: {
+        ballSpeed: 9,
+        maxBallSpeed: 20,
+        paddleSpeed: 12,
+        speedIncrease: 0.7
+    }
+};
+
+// Current speed setting
+let currentSpeed = 'medium';
+
+// Game variables (set based on speed)
+let PADDLE_SPEED;
+let INITIAL_BALL_SPEED;
+let BALL_SPEED_INCREASE;
+let MAX_BALL_SPEED;
+
+function applySpeedSettings() {
+    const settings = SPEED_SETTINGS[currentSpeed];
+    PADDLE_SPEED = settings.paddleSpeed;
+    INITIAL_BALL_SPEED = settings.ballSpeed;
+    BALL_SPEED_INCREASE = settings.speedIncrease;
+    MAX_BALL_SPEED = settings.maxBallSpeed;
+}
+
+applySpeedSettings();
 
 // Colors
 const COLOR_BG = '#1a1a1a';
@@ -67,6 +104,24 @@ const keys = {
     ArrowUp: false,
     ArrowDown: false
 };
+
+// Speed button handling
+const speedButtons = document.querySelectorAll('.speed-btn');
+speedButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        speedButtons.forEach(b => b.classList.remove('active'));
+        // Add active class to clicked button
+        btn.classList.add('active');
+        // Update speed setting
+        currentSpeed = btn.dataset.speed;
+        applySpeedSettings();
+        // Reset ball speed if in menu
+        if (currentState === GameState.MENU) {
+            ball.speed = INITIAL_BALL_SPEED;
+        }
+    });
+});
 
 // Event listeners for keyboard input
 document.addEventListener('keydown', (e) => {
